@@ -1,5 +1,6 @@
 package org.springframework.social.wechat.api.impl.json;
 
+import org.springframework.social.wechat.api.AccessToken;
 import org.springframework.social.wechat.api.ActionInfo;
 import org.springframework.social.wechat.api.QuickResponseCodeRequest;
 import org.springframework.social.wechat.api.QuickResponseCodeTicket;
@@ -20,6 +21,7 @@ public class WechatModule extends SimpleModule
 	@Override
 	public void setupModule(SetupContext context)
 	{
+		context.setMixInAnnotations(AccessToken.class, AccessTokenMixin.class);
 		context.setMixInAnnotations(ActionInfo.class, ActionInfoMixin.class);
 		context.setMixInAnnotations(QuickResponseCodeRequest.class,
 				QuickResponseCodeRequestMixin.class);

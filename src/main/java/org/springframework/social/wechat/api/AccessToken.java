@@ -1,12 +1,13 @@
 package org.springframework.social.wechat.api;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.io.Serializable;
 
-public class AccessToken
+public class AccessToken extends WechatObject implements Serializable
 {
-	@JsonProperty("access_token")
+	private static final long serialVersionUID = -8917170810298579662L;
+
 	private String accessToken;
-	@JsonProperty("expires_in")
+
 	private Integer expiresIn;
 
 	public String getAccessToken()
