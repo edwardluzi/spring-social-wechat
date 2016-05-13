@@ -3,12 +3,12 @@ package org.springframework.social.wechat.api.impl;
 import java.net.URI;
 
 import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
 import org.springframework.social.oauth2.TokenStrategy;
 import org.springframework.social.support.ClientHttpRequestFactorySelector;
 import org.springframework.social.support.URIBuilder;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.wechat.api.AccessToken;
 import org.springframework.social.wechat.api.AccountOperations;
 import org.springframework.social.wechat.api.MessageOperations;

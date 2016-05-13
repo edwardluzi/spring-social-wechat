@@ -50,7 +50,7 @@ public abstract class Message
 	protected Message(MessageType type)
 	{
 		this.MsgType = type;
-		this.CreateTime = Calendar.getInstance().getTime().getTime();
+		this.CreateTime = Calendar.getInstance().getTimeInMillis();
 	}
 
 	protected Message(Map<String, String> params) throws Exception
