@@ -1,17 +1,22 @@
-package org.springframework.social.wechat.api.impl;
+package org.springframework.social.wechat.connect;
 
 import static org.junit.Assert.assertNotNull;
 
+import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.social.oauth2.AccessGrant;
-import org.springframework.social.wechat.connect.WechatServiceProvider;
 
-public class AbstractWechatApiTest
+@ComponentScan(basePackages = "org.springframework.social.wechat")
+@PropertySource("classpath:application.properties")
+public class ServiceProviderTest
 {
-	protected WechatTemplate wechat;
+	private static final Logger logger = Logger.getLogger(ServiceProviderTest.class);
 
 	private AnnotationConfigApplicationContext applicationContext;
 	private Environment environment;
@@ -19,11 +24,8 @@ public class AbstractWechatApiTest
 	@Before
 	public void setup()
 	{
-		this.applicationContext = new AnnotationConfigApplicationContext(
-				AbstractWechatApiTest.class);
+		this.applicationContext = new AnnotationConfigApplicationContext(ServiceProviderTest.class);
 		this.environment = this.applicationContext.getEnvironment();
-
-		this.wechat = createWechatTemplate();
 	}
 
 	@After
@@ -35,8 +37,11 @@ public class AbstractWechatApiTest
 		}
 	}
 
-	protected WechatTemplate createWechatTemplate()
+	@Test
+	public void testConnect()
 	{
+		assertNotNull(environment);
+		
 		String appid = environment.getProperty("social.wechat.appid");
 		String secret = environment.getProperty("social.wechat.secret");
 
@@ -44,8 +49,10 @@ public class AbstractWechatApiTest
 
 		AccessGrant accessGrant = provider.getOAuthOperations().authenticateClient(null);
 
-		assertNotNull(accessGrant.getAccessToken());
+		String accessToken = accessGrant.getAccessToken();
 
-		return new WechatTemplate(accessGrant.getAccessToken());
+		logger.debug(accessToken);
+
+		assertNotNull(accessToken);
 	}
 }

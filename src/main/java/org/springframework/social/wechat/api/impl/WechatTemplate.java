@@ -1,22 +1,15 @@
 package org.springframework.social.wechat.api.impl;
 
-import java.net.URI;
-
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.oauth2.OAuth2Version;
 import org.springframework.social.oauth2.TokenStrategy;
 import org.springframework.social.support.ClientHttpRequestFactorySelector;
-import org.springframework.social.support.URIBuilder;
-import org.springframework.social.wechat.api.AccessToken;
 import org.springframework.social.wechat.api.AccountOperations;
 import org.springframework.social.wechat.api.MessageOperations;
 import org.springframework.social.wechat.api.Wechat;
 import org.springframework.social.wechat.api.impl.json.WechatModule;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
@@ -107,22 +100,5 @@ public class WechatTemplate extends AbstractOAuth2ApiBinding implements Wechat
 
 		this.messageOperations = new MessageTemplate(getRestTemplate(), objectMapper,
 				isAuthorized());
-	}
-
-	public static AccessToken getAccessToken(String appid, String secret)
-			throws RestClientException
-	{
-
-		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
-		params.add("grant_type", "client_credential");
-		params.add("appid", appid);
-		params.add("secret", secret);
-
-		URI uri = URIBuilder.fromUri("https://api.weixin.qq.com/cgi-bin/token").queryParams(params)
-				.build();
-
-		RestTemplate restTemplate = new RestTemplate();
-
-		return restTemplate.getForObject(uri, AccessToken.class);
 	}
 }
