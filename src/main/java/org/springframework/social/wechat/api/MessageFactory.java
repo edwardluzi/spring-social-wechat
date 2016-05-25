@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -15,6 +16,8 @@ import org.w3c.dom.NodeList;
 
 public class MessageFactory
 {
+	private static final Logger logger = Logger.getLogger(MessageFactory.class);
+	
 	public static Message create(HttpServletRequest request)
 	{
 		Message message = null;
@@ -62,7 +65,7 @@ public class MessageFactory
 		catch (Exception e)
 		{
 			message = null;
-			e.printStackTrace();
+			logger.error(e);
 		}
 
 		return message;

@@ -4,8 +4,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
+import org.apache.log4j.Logger;
+
 public class Signature
 {
+	private static final Logger logger = Logger.getLogger(Signature.class);
+	
 	public static boolean check(String signature, String token, String timestamp, String nonce)
 	{
 		String[] tempArray = { token, timestamp, nonce };
@@ -33,7 +37,7 @@ public class Signature
 		}
 		catch (NoSuchAlgorithmException e)
 		{
-			e.printStackTrace();
+			logger.error(e);
 		}
 
 		return sha1;
