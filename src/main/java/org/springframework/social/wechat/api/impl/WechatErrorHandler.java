@@ -24,9 +24,9 @@ public class WechatErrorHandler extends DefaultResponseErrorHandler
 
 		if (statusCode.series().equals(HttpStatus.Series.CLIENT_ERROR))
 		{
-			String message = errorDetails.containsKey("error") ? (String) errorDetails.get("error")
+			String message = errorDetails.containsKey("errmsg") ? (String) errorDetails.get("errmsg")
 					: "Unknown error";
-			throw new UncategorizedApiException("weibo", message, null);
+			throw new UncategorizedApiException("wechat", message, null);
 		}
 
 		handleUncategorizedError(response);
@@ -40,7 +40,7 @@ public class WechatErrorHandler extends DefaultResponseErrorHandler
 		}
 		catch (Exception e)
 		{
-			throw new UncategorizedApiException("weibo", "Error consuming Weibo REST api", e);
+			throw new UncategorizedApiException("wechat", "Error consuming wechat REST api", e);
 		}
 	}
 

@@ -1,5 +1,6 @@
 package org.springframework.social.wechat.api.impl;
 
+import org.springframework.social.wechat.api.ErrorCode;
 import org.springframework.social.wechat.api.MessageOperations;
 import org.springframework.social.wechat.api.TemplateMessage;
 import org.springframework.web.client.RestOperations;
@@ -17,11 +18,13 @@ public class MessageTemplate extends AbstractTemplate implements MessageOperatio
 	}
 
 	@Override
-	public void send(TemplateMessage<?> message)
+	public boolean send(TemplateMessage<?> message)
 	{
 		requireAuthorization();
 
-		this.getRestOperations().postForObject(buildUri(API_URL_SEND_TEMPLATE_MESSAGE), message,
-				Void.class);
+		ErrorCode errorCode = this.getRestOperations().postForObject(
+				buildUri(API_URL_SEND_TEMPLATE_MESSAGE), message, ErrorCode.class);
+
+		return errorCode.getErrcode() == 0;
 	}
 }

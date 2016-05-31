@@ -15,7 +15,7 @@ import org.springframework.social.wechat.api.Scene;
 public class AccountTemplateTest extends AbstractWechatApiTest
 {
 	@Test
-	public void test()
+	public void testQRCode()
 	{
 		QuickResponseCodeRequest request = new QuickResponseCodeRequest();
 

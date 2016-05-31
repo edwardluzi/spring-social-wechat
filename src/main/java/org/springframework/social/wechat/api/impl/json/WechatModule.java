@@ -2,9 +2,11 @@ package org.springframework.social.wechat.api.impl.json;
 
 import org.springframework.social.wechat.api.AccessToken;
 import org.springframework.social.wechat.api.ActionInfo;
+import org.springframework.social.wechat.api.ErrorCode;
 import org.springframework.social.wechat.api.QuickResponseCodeRequest;
 import org.springframework.social.wechat.api.QuickResponseCodeTicket;
 import org.springframework.social.wechat.api.Scene;
+import org.springframework.social.wechat.api.ValueColorPair;
 import org.springframework.social.wechat.api.WechatObject;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -29,5 +31,7 @@ public class WechatModule extends SimpleModule
 				QuickResponseCodeTicketMixin.class);
 		context.setMixInAnnotations(Scene.class, SceneMixin.class);
 		context.setMixInAnnotations(WechatObject.class, WechatObjectMixin.class);
+		context.setMixInAnnotations(ValueColorPair.class, ValueColorPairMixin.class);
+		context.setMixInAnnotations(ErrorCode.class, ErrorCodeMixin.class);
 	}
 }
