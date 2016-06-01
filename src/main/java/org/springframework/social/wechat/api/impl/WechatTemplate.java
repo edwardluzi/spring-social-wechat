@@ -17,88 +17,84 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class WechatTemplate extends AbstractOAuth2ApiBinding implements Wechat
 {
-	private AccountOperations accountOperations;
-	private MessageOperations messageOperations;
+    private AccountOperations accountOperations;
+    private MessageOperations messageOperations;
 
-	private ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
 
-	public WechatTemplate(String accessToken)
-	{
-		super(accessToken, TokenStrategy.ACCESS_TOKEN_PARAMETER);
-		initialize();
-	}
+    public WechatTemplate(String accessToken)
+    {
+        super(accessToken, TokenStrategy.ACCESS_TOKEN_PARAMETER);
+        initialize();
+    }
 
-	public WechatTemplate()
-	{
-		initialize();
-	}
+    public WechatTemplate()
+    {
+        initialize();
+    }
 
-	public AccountOperations accountOperations()
-	{
-		return accountOperations;
-	}
+    public AccountOperations accountOperations()
+    {
+        return accountOperations;
+    }
 
-	public MessageOperations messageOperations()
-	{
-		return messageOperations;
-	}
+    public MessageOperations messageOperations()
+    {
+        return messageOperations;
+    }
 
-	public RestOperations restOperations()
-	{
-		return getRestTemplate();
-	}
+    public RestOperations restOperations()
+    {
+        return getRestTemplate();
+    }
 
-	protected ObjectMapper getObjectMapper()
-	{
-		return objectMapper;
-	}
+    protected ObjectMapper getObjectMapper()
+    {
+        return objectMapper;
+    }
 
-	@Override
-	public void setRequestFactory(ClientHttpRequestFactory requestFactory)
-	{
-		// Wrap the request factory with a BufferingClientHttpRequestFactory so
-		// that the error handler can do repeat reads on the response.getBody()
-		super.setRequestFactory(ClientHttpRequestFactorySelector.bufferRequests(requestFactory));
-	}
+    @Override
+    public void setRequestFactory(ClientHttpRequestFactory requestFactory)
+    {
+        // Wrap the request factory with a BufferingClientHttpRequestFactory so
+        // that the error handler can do repeat reads on the response.getBody()
+        super.setRequestFactory(ClientHttpRequestFactorySelector.bufferRequests(requestFactory));
+    }
 
-	@Override
-	protected OAuth2Version getOAuth2Version()
-	{
-		return OAuth2Version.BEARER_DRAFT_2;
-	}
+    @Override
+    protected OAuth2Version getOAuth2Version()
+    {
+        return OAuth2Version.BEARER_DRAFT_2;
+    }
 
-	@Override
-	protected void configureRestTemplate(RestTemplate restTemplate)
-	{
-		super.configureRestTemplate(restTemplate);
-		restTemplate.setErrorHandler(new WechatErrorHandler());
-	}
+    @Override
+    protected void configureRestTemplate(RestTemplate restTemplate)
+    {
+        super.configureRestTemplate(restTemplate);
+        restTemplate.setErrorHandler(new WechatErrorHandler());
+    }
 
-	@Override
-	protected MappingJackson2HttpMessageConverter getJsonMessageConverter()
-	{
-		MappingJackson2HttpMessageConverter converter = super.getJsonMessageConverter();
-		objectMapper = new ObjectMapper();
-		objectMapper.registerModule(new WechatModule());
-		converter.setObjectMapper(objectMapper);
-		return converter;
-	}
+    @Override
+    protected MappingJackson2HttpMessageConverter getJsonMessageConverter()
+    {
+        MappingJackson2HttpMessageConverter converter = super.getJsonMessageConverter();
+        objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new WechatModule());
+        converter.setObjectMapper(objectMapper);
+        return converter;
+    }
 
-	private void initialize()
-	{
-		// Wrap the request factory with a BufferingClientHttpRequestFactory so
-		// that the error handler can do repeat reads on the response.getBody()
-		super.setRequestFactory(ClientHttpRequestFactorySelector.bufferRequests(getRestTemplate()
-				.getRequestFactory()));
-		initSubApis();
-	}
+    private void initialize()
+    {
+        // Wrap the request factory with a BufferingClientHttpRequestFactory so
+        // that the error handler can do repeat reads on the response.getBody()
+        super.setRequestFactory(ClientHttpRequestFactorySelector.bufferRequests(getRestTemplate().getRequestFactory()));
+        initSubApis();
+    }
 
-	private void initSubApis()
-	{
-		this.accountOperations = new AccountTemplate(getRestTemplate(), objectMapper,
-				isAuthorized());
-
-		this.messageOperations = new MessageTemplate(getRestTemplate(), objectMapper,
-				isAuthorized());
-	}
+    private void initSubApis()
+    {
+        accountOperations = new AccountTemplate(getRestTemplate(), objectMapper, isAuthorized());
+        messageOperations = new MessageTemplate(getRestTemplate(), objectMapper, isAuthorized());
+    }
 }

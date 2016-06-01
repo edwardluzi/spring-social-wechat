@@ -6,10 +6,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 abstract class ValueColorPairMixin extends WechatObjectMixin
 {
-	@JsonProperty("value")
-	private String value;
+    @JsonProperty("value")
+    private String value;
 
-	@JsonProperty("color")
-	private String color;
+    @JsonProperty("color")
+    private String color;
 
 }

@@ -4,31 +4,20 @@ import java.util.Map;
 
 public class SubscribeEvent extends EventMessage
 {
-	private String EventKey;
-	private String Ticket;
+    private String ticket;
 
-	public SubscribeEvent(Map<String, String> params) throws Exception
-	{
-		super(params);
+    public SubscribeEvent(Map<String, String> params) throws Exception
+    {
+        super(params);
 
-		if (params.containsKey("EventKey"))
-		{
-			this.EventKey = params.get("EventKey");
-		}
+        if (params.containsKey("Ticket"))
+        {
+            ticket = params.get("Ticket");
+        }
+    }
 
-		if (params.containsKey("Ticket"))
-		{
-			this.Ticket = params.get("Ticket");
-		}
-	}
-
-	public String getEventKey()
-	{
-		return EventKey;
-	}
-
-	public String getTicket()
-	{
-		return Ticket;
-	}
+    public String getTicket()
+    {
+        return ticket;
+    }
 }

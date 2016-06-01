@@ -8,6 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 abstract class ActionInfoMixin extends WechatObjectMixin
 {
-	@JsonProperty("scene")
-	private Scene scene;
+    @JsonProperty("scene")
+    private Scene scene;
 }

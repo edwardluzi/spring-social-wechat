@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 abstract class AccessTokenMixin extends WechatObjectMixin
 {
-	@JsonProperty("access_token")
-	String accessToken;
-	@JsonProperty("expires_in")
-	Integer expiresIn;
+    @JsonProperty("access_token")
+    String accessToken;
+    @JsonProperty("expires_in")
+    Integer expiresIn;
 }

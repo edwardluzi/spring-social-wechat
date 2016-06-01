@@ -8,51 +8,51 @@ import org.apache.log4j.Logger;
 
 public class Signature
 {
-	private static final Logger logger = Logger.getLogger(Signature.class);
-	
-	public static boolean check(String signature, String token, String timestamp, String nonce)
-	{
-		String[] tempArray = { token, timestamp, nonce };
-		Arrays.sort(tempArray);
+    private static final Logger logger = Logger.getLogger(Signature.class);
 
-		StringBuffer sb = new StringBuffer();
+    public static boolean check(String signature, String token, String timestamp, String nonce)
+    {
+        String[] tempArray = { token, timestamp, nonce };
+        Arrays.sort(tempArray);
 
-		for (int i = 0; i < tempArray.length; i++)
-		{
-			sb.append(tempArray[i]);
-		}
+        StringBuffer sb = new StringBuffer();
 
-		return sha1(sb.toString()).equalsIgnoreCase(signature);
-	}
+        for (int i = 0; i < tempArray.length; i++)
+        {
+            sb.append(tempArray[i]);
+        }
 
-	private static String sha1(String str)
-	{
-		MessageDigest md = null;
-		String sha1 = null;
+        return sha1(sb.toString()).equalsIgnoreCase(signature);
+    }
 
-		try
-		{
-			md = MessageDigest.getInstance("SHA-1");
-			sha1 = bytes2HexString(md.digest(str.getBytes()));
-		}
-		catch (NoSuchAlgorithmException e)
-		{
-			logger.error(e);
-		}
+    private static String sha1(String str)
+    {
+        MessageDigest md = null;
+        String sha1 = null;
 
-		return sha1;
-	}
+        try
+        {
+            md = MessageDigest.getInstance("SHA-1");
+            sha1 = bytes2HexString(md.digest(str.getBytes()));
+        }
+        catch (NoSuchAlgorithmException e)
+        {
+            logger.error(e);
+        }
 
-	private static String bytes2HexString(byte[] bytes)
-	{
-		StringBuffer sb = new StringBuffer(bytes.length * 2);
+        return sha1;
+    }
 
-		for (int i = 0; i < bytes.length; i++)
-		{
-			sb.append(Character.forDigit((bytes[i] & 0xFF) >> 4, 16));
-			sb.append(Character.forDigit(bytes[i] & 0x0F, 16));
-		}
+    private static String bytes2HexString(byte[] bytes)
+    {
+        StringBuffer sb = new StringBuffer(bytes.length * 2);
 
-		return sb.toString().toLowerCase();
-	}
+        for (int i = 0; i < bytes.length; i++)
+        {
+            sb.append(Character.forDigit((bytes[i] & 0xFF) >> 4, 16));
+            sb.append(Character.forDigit(bytes[i] & 0x0F, 16));
+        }
+
+        return sb.toString().toLowerCase();
+    }
 }

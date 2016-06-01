@@ -9,19 +9,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 class AccountTemplate extends AbstractTemplate implements AccountOperations
 {
-	private static final String API_URL_QRCODE_CREATE = "qrcode/create";
+    private static final String API_URL_QRCODE_CREATE = "qrcode/create";
 
-	public AccountTemplate(RestOperations restOperations, ObjectMapper objectMapper,
-			boolean isAuthorized)
-	{
-		super(restOperations, objectMapper, isAuthorized);
-	}
+    public AccountTemplate(RestOperations restOperations, ObjectMapper objectMapper, boolean isAuthorized)
+    {
+        super(restOperations, objectMapper, isAuthorized);
+    }
 
-	public QuickResponseCodeTicket createQuickResponseCode(QuickResponseCodeRequest request)
-	{
-		requireAuthorization();
+    public QuickResponseCodeTicket createQuickResponseCode(QuickResponseCodeRequest request)
+    {
+        requireAuthorization();
 
-		return this.getRestOperations().postForObject(buildUri(API_URL_QRCODE_CREATE), request,
-				QuickResponseCodeTicket.class);
-	}
+        return getRestOperations().postForObject(buildUri(API_URL_QRCODE_CREATE), request,
+                QuickResponseCodeTicket.class);
+    }
 }

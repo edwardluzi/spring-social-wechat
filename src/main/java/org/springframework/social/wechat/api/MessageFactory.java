@@ -16,85 +16,85 @@ import org.w3c.dom.NodeList;
 
 public class MessageFactory
 {
-	private static final Logger logger = Logger.getLogger(MessageFactory.class);
-	
-	public static Message create(HttpServletRequest request)
-	{
-		Message message = null;
+    private static final Logger logger = Logger.getLogger(MessageFactory.class);
 
-		try
-		{
-			Map<String, String> params = parse(request);
-			MessageType messageType = MessageType.valueOf(params.get("MsgType"));
+    public static Message create(HttpServletRequest request)
+    {
+        Message message = null;
 
-			switch (messageType)
-			{
-			case event:
-			{
-				EventType eventType = EventType.valueOf(params.get("Event"));
+        try
+        {
+            Map<String, String> params = parse(request);
+            MessageType messageType = MessageType.valueOf(params.get("MsgType"));
 
-				switch (eventType)
-				{
-				case subscribe:
-				{
-					message = new SubscribeEvent(params);
-					break;
-				}
-				case scan:
-				{
-					message = new ScanEvent(params);
-					break;
-				}
-				default:
-					break;
-				}
+            switch (messageType)
+            {
+            case event:
+            {
+                EventType eventType = EventType.valueOf(params.get("Event"));
 
-				break;
-			}
-			case text:
-			{
-				message = new TextMessage(params);
-				break;
-			}
-			default:
-			{
-				break;
-			}
-			}
-		}
-		catch (Exception e)
-		{
-			message = null;
-			logger.error(e);
-		}
+                switch (eventType)
+                {
+                case subscribe:
+                {
+                    message = new SubscribeEvent(params);
+                    break;
+                }
+                case scan:
+                {
+                    message = new ScanEvent(params);
+                    break;
+                }
+                default:
+                    break;
+                }
 
-		return message;
-	}
+                break;
+            }
+            case text:
+            {
+                message = new TextMessage(params);
+                break;
+            }
+            default:
+            {
+                break;
+            }
+            }
+        }
+        catch (Exception e)
+        {
+            message = null;
+            logger.error(e);
+        }
 
-	private static Map<String, String> parse(HttpServletRequest request) throws Exception
-	{
-		Map<String, String> params = new HashMap<String, String>();
-		InputStream inputStream = request.getInputStream();
-		DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder documentBuilder = builderFactory.newDocumentBuilder();
+        return message;
+    }
 
-		Document document = documentBuilder.parse(inputStream);
-		Element rootNode = document.getDocumentElement();
-		NodeList childNodes = rootNode.getChildNodes();
+    private static Map<String, String> parse(HttpServletRequest request) throws Exception
+    {
+        Map<String, String> params = new HashMap<String, String>();
+        InputStream inputStream = request.getInputStream();
+        DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder = builderFactory.newDocumentBuilder();
 
-		for (int i = 0; i < childNodes.getLength(); i++)
-		{
-			Node node = childNodes.item(i);
+        Document document = documentBuilder.parse(inputStream);
+        Element rootNode = document.getDocumentElement();
+        NodeList childNodes = rootNode.getChildNodes();
 
-			if (node.getNodeType() == Node.ELEMENT_NODE)
-			{
-				params.put(node.getNodeName(), node.getTextContent());
-			}
-		}
+        for (int i = 0; i < childNodes.getLength(); i++)
+        {
+            Node node = childNodes.item(i);
 
-		inputStream.close();
-		inputStream = null;
+            if (node.getNodeType() == Node.ELEMENT_NODE)
+            {
+                params.put(node.getNodeName(), node.getTextContent());
+            }
+        }
 
-		return params;
-	}
+        inputStream.close();
+        inputStream = null;
+
+        return params;
+    }
 }

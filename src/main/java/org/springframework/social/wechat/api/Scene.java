@@ -4,39 +4,39 @@ import java.io.Serializable;
 
 public class Scene extends WechatObject implements Serializable
 {
-	private static final long serialVersionUID = 1497268036177063492L;
+    private static final long serialVersionUID = 1497268036177063492L;
 
-	private Integer sceneId;
+    private Integer sceneId;
 
-	private String sceneStr;
+    private String sceneStr;
 
-	public Integer getSceneId()
-	{
-		return sceneId;
-	}
+    public Integer getSceneId()
+    {
+        return sceneId;
+    }
 
-	public void setSceneId(Integer sceneId)
-	{
-		this.sceneId = sceneId;
-	}
+    public void setSceneId(Integer sceneId)
+    {
+        this.sceneId = sceneId;
+    }
 
-	public String getSceneStr()
-	{
-		return sceneStr;
-	}
+    public String getSceneStr()
+    {
+        return sceneStr;
+    }
 
-	public void setSceneStr(String sceneStr)
-	{
-		this.sceneStr = sceneStr;
-	}
+    public void setSceneStr(String sceneStr)
+    {
+        this.sceneStr = sceneStr;
+    }
 
-	public Scene(Integer sceneId)
-	{
-		this.sceneId = sceneId;
-	}
+    public Scene(Integer sceneId)
+    {
+        this.sceneId = sceneId;
+    }
 
-	public Scene(String sceneStr)
-	{
-		this.sceneStr = sceneStr;
-	}
+    public Scene(String sceneStr)
+    {
+        this.sceneStr = sceneStr;
+    }
 }

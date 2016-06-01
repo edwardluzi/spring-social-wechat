@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 abstract class ErrorCodeMixin extends WechatObjectMixin
 {
-	@JsonProperty("errcode")
-	Integer errcode;
+    @JsonProperty("errcode")
+    Integer errcode;
 
-	@JsonProperty("errmsg")
-	String errmsg;
+    @JsonProperty("errmsg")
+    String errmsg;
 }

@@ -5,20 +5,20 @@ import java.util.Map;
 
 public abstract class WechatObject
 {
-	private Map<String, Object> extraData;
+    private Map<String, Object> extraData;
 
-	public WechatObject()
-	{
-		this.extraData = new HashMap<String, Object>();
-	}
+    public WechatObject()
+    {
+        extraData = new HashMap<String, Object>();
+    }
 
-	public Map<String, Object> getExtraData()
-	{
-		return this.extraData;
-	}
+    public Map<String, Object> getExtraData()
+    {
+        return extraData;
+    }
 
-	protected void add(String key, Object value)
-	{
-		this.extraData.put(key, value);
-	}
+    protected void add(String key, Object value)
+    {
+        extraData.put(key, value);
+    }
 }

@@ -11,41 +11,40 @@ import org.springframework.social.wechat.connect.WechatServiceProvider;
 
 public class AbstractWechatApiTest
 {
-	protected WechatTemplate wechat;
+    protected WechatTemplate wechat;
 
-	private AnnotationConfigApplicationContext applicationContext;
-	private Environment environment;
+    private AnnotationConfigApplicationContext applicationContext;
+    private Environment environment;
 
-	@Before
-	public void setup()
-	{
-		this.applicationContext = new AnnotationConfigApplicationContext(
-				AbstractWechatApiTest.class);
-		this.environment = this.applicationContext.getEnvironment();
+    @Before
+    public void setup()
+    {
+        applicationContext = new AnnotationConfigApplicationContext(AbstractWechatApiTest.class);
+        environment = applicationContext.getEnvironment();
 
-		this.wechat = createWechatTemplate();
-	}
+        wechat = createWechatTemplate();
+    }
 
-	@After
-	public void tearDown()
-	{
-		if (this.applicationContext != null)
-		{
-			this.applicationContext.close();
-		}
-	}
+    @After
+    public void tearDown()
+    {
+        if (applicationContext != null)
+        {
+            applicationContext.close();
+        }
+    }
 
-	protected WechatTemplate createWechatTemplate()
-	{
-		String appid = environment.getProperty("social.wechat.appid");
-		String secret = environment.getProperty("social.wechat.secret");
+    protected WechatTemplate createWechatTemplate()
+    {
+        String appid = environment.getProperty("social.wechat.appid");
+        String secret = environment.getProperty("social.wechat.secret");
 
-		WechatServiceProvider provider = new WechatServiceProvider(appid, secret);
+        WechatServiceProvider provider = new WechatServiceProvider(appid, secret);
 
-		AccessGrant accessGrant = provider.getOAuthOperations().authenticateClient(null);
+        AccessGrant accessGrant = provider.getOAuthOperations().authenticateClient(null);
 
-		assertNotNull(accessGrant.getAccessToken());
+        assertNotNull(accessGrant.getAccessToken());
 
-		return new WechatTemplate(accessGrant.getAccessToken());
-	}
+        return new WechatTemplate(accessGrant.getAccessToken());
+    }
 }

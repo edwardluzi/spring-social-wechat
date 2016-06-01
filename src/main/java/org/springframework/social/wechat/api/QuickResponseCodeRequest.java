@@ -4,41 +4,41 @@ import java.io.Serializable;
 
 public class QuickResponseCodeRequest extends WechatObject implements Serializable
 {
-	private static final long serialVersionUID = -8459833356442062115L;
+    private static final long serialVersionUID = -8459833356442062115L;
 
-	private Integer expireSeconds;
+    private Integer expireSeconds;
 
-	private String actionName;
+    private String actionName;
 
-	private ActionInfo actionInfo;
+    private ActionInfo actionInfo;
 
-	public Integer getExpireSeconds()
-	{
-		return expireSeconds;
-	}
+    public Integer getExpireSeconds()
+    {
+        return expireSeconds;
+    }
 
-	public void setExpireSeconds(Integer expireSeconds)
-	{
-		this.expireSeconds = expireSeconds;
-	}
+    public void setExpireSeconds(Integer expireSeconds)
+    {
+        this.expireSeconds = expireSeconds;
+    }
 
-	public String getActionName()
-	{
-		return actionName;
-	}
+    public String getActionName()
+    {
+        return actionName;
+    }
 
-	public void setActionName(String actionName)
-	{
-		this.actionName = actionName;
-	}
+    public void setActionName(String actionName)
+    {
+        this.actionName = actionName;
+    }
 
-	public ActionInfo getActionInfo()
-	{
-		return actionInfo;
-	}
+    public ActionInfo getActionInfo()
+    {
+        return actionInfo;
+    }
 
-	public void setActionInfo(ActionInfo actionInfo)
-	{
-		this.actionInfo = actionInfo;
-	}
+    public void setActionInfo(ActionInfo actionInfo)
+    {
+        this.actionInfo = actionInfo;
+    }
 }

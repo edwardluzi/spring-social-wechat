@@ -16,43 +16,43 @@ import org.springframework.social.oauth2.AccessGrant;
 @PropertySource("classpath:application.properties")
 public class ServiceProviderTest
 {
-	private static final Logger logger = Logger.getLogger(ServiceProviderTest.class);
+    private static final Logger logger = Logger.getLogger(ServiceProviderTest.class);
 
-	private AnnotationConfigApplicationContext applicationContext;
-	private Environment environment;
+    private AnnotationConfigApplicationContext applicationContext;
+    private Environment environment;
 
-	@Before
-	public void setup()
-	{
-		this.applicationContext = new AnnotationConfigApplicationContext(ServiceProviderTest.class);
-		this.environment = this.applicationContext.getEnvironment();
-	}
+    @Before
+    public void setup()
+    {
+        applicationContext = new AnnotationConfigApplicationContext(ServiceProviderTest.class);
+        environment = applicationContext.getEnvironment();
+    }
 
-	@After
-	public void tearDown()
-	{
-		if (this.applicationContext != null)
-		{
-			this.applicationContext.close();
-		}
-	}
+    @After
+    public void tearDown()
+    {
+        if (applicationContext != null)
+        {
+            applicationContext.close();
+        }
+    }
 
-	@Test
-	public void testConnect()
-	{
-		assertNotNull(environment);
-		
-		String appid = environment.getProperty("social.wechat.appid");
-		String secret = environment.getProperty("social.wechat.secret");
+    @Test
+    public void testConnect()
+    {
+        assertNotNull(environment);
 
-		WechatServiceProvider provider = new WechatServiceProvider(appid, secret);
+        String appid = environment.getProperty("social.wechat.appid");
+        String secret = environment.getProperty("social.wechat.secret");
 
-		AccessGrant accessGrant = provider.getOAuthOperations().authenticateClient(null);
+        WechatServiceProvider provider = new WechatServiceProvider(appid, secret);
 
-		String accessToken = accessGrant.getAccessToken();
+        AccessGrant accessGrant = provider.getOAuthOperations().authenticateClient(null);
 
-		logger.debug(accessToken);
+        String accessToken = accessGrant.getAccessToken();
 
-		assertNotNull(accessToken);
-	}
+        logger.debug(accessToken);
+
+        assertNotNull(accessToken);
+    }
 }

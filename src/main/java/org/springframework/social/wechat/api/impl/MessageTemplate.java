@@ -9,22 +9,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class MessageTemplate extends AbstractTemplate implements MessageOperations
 {
-	private static final String API_URL_SEND_TEMPLATE_MESSAGE = "message/template/send";
+    private static final String API_URL_SEND_TEMPLATE_MESSAGE = "message/template/send";
 
-	public MessageTemplate(RestOperations restOperations, ObjectMapper objectMapper,
-			boolean isAuthorized)
-	{
-		super(restOperations, objectMapper, isAuthorized);
-	}
+    public MessageTemplate(RestOperations restOperations, ObjectMapper objectMapper, boolean isAuthorized)
+    {
+        super(restOperations, objectMapper, isAuthorized);
+    }
 
-	@Override
-	public boolean send(TemplateMessage<?> message)
-	{
-		requireAuthorization();
+    @Override
+    public boolean send(TemplateMessage<?> message)
+    {
+        requireAuthorization();
 
-		ErrorCode errorCode = this.getRestOperations().postForObject(
-				buildUri(API_URL_SEND_TEMPLATE_MESSAGE), message, ErrorCode.class);
+        ErrorCode errorCode = getRestOperations().postForObject(buildUri(API_URL_SEND_TEMPLATE_MESSAGE), message,
+                ErrorCode.class);
 
-		return errorCode.getErrcode() == 0;
-	}
+        return errorCode.getErrcode() == 0;
+    }
 }

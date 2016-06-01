@@ -14,19 +14,18 @@ import org.springframework.social.wechat.api.Scene;
 @PropertySource("classpath:application.properties")
 public class AccountTemplateTest extends AbstractWechatApiTest
 {
-	@Test
-	public void testQRCode()
-	{
-		QuickResponseCodeRequest request = new QuickResponseCodeRequest();
+    @Test
+    public void testQRCode()
+    {
+        QuickResponseCodeRequest request = new QuickResponseCodeRequest();
 
-		request.setExpireSeconds(600);
-		request.setActionName("QR_SCENE");
-		request.setActionInfo(new ActionInfo(new Scene(100)));
+        request.setExpireSeconds(600);
+        request.setActionName("QR_SCENE");
+        request.setActionInfo(new ActionInfo(new Scene(100)));
 
-		QuickResponseCodeTicket ticket = this.wechat.accountOperations().createQuickResponseCode(
-				request);
+        QuickResponseCodeTicket ticket = wechat.accountOperations().createQuickResponseCode(request);
 
-		assertNotNull(ticket);
-		assertNotNull(ticket.getTicket());
-	}
+        assertNotNull(ticket);
+        assertNotNull(ticket.getTicket());
+    }
 }
