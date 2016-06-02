@@ -12,10 +12,14 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
 
 public abstract class Message
 {
+    // CHECKSTYLE:OFF
+
     private String FromUserName;
     private String ToUserName;
     private long CreateTime;
     private MessageType MsgType;
+
+    // CHECKSTYLE:ON
 
     public String getFromUserName()
     {
@@ -75,10 +79,12 @@ public abstract class Message
         {
             xstream = new XStream(new XppDriver()
             {
+                @Override
                 public HierarchicalStreamWriter createWriter(Writer out)
                 {
                     return new PrettyPrintWriter(out)
                     {
+                        @Override
                         protected void writeText(QuickWriter writer, String text)
                         {
                             writer.write("<![CDATA[");

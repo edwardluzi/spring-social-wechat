@@ -43,6 +43,7 @@ public class WechatErrorHandler extends DefaultResponseErrorHandler
         }
     }
 
+    @SuppressWarnings({ "checkstyle:GenericWhitespace" })
     private Map<String, Object> extractErrorDetailsFromResponse(ClientHttpResponse response) throws IOException
     {
         ObjectMapper mapper = new ObjectMapper(new JsonFactory());

@@ -4,9 +4,9 @@ public class WeChatException extends RuntimeException
 {
     private static final long serialVersionUID = 4019046302399739194L;
 
-    public WeChatException(Exception e)
+    public WeChatException(Exception exception)
     {
-        super(e);
+        super(exception);
     }
 
     public WeChatException(String reason)

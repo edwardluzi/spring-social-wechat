@@ -4,8 +4,12 @@ import java.util.Map;
 
 public class TextMessage extends Message
 {
+    // CHECKSTYLE:OFF
+
     private long MsgId;
     private String Content;
+
+    // CHECKSTYLE:ON
 
     public long getMsgId()
     {

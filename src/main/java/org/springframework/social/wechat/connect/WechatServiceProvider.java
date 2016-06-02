@@ -14,13 +14,13 @@ public class WechatServiceProvider extends AbstractOAuth2ServiceProvider<Wechat>
 
     private static OAuth2Template getOAuth2Template(String appId, String appSecret)
     {
-        OAuth2Template oAuth2Template = new WechatOAuth2Template(appId, appSecret,
+        OAuth2Template oauth2Template = new WechatOAuth2Template(appId, appSecret,
                 "https://open.weixin.qq.com/connect/oauth2/authorize", "https://api.weixin.qq.com/cgi-bin/token");
-
-        oAuth2Template.setUseParametersForClientAuthentication(true);
-        return oAuth2Template;
+        oauth2Template.setUseParametersForClientAuthentication(true);
+        return oauth2Template;
     }
 
+    @Override
     public Wechat getApi(String accessToken)
     {
         return new WechatTemplate(accessToken);

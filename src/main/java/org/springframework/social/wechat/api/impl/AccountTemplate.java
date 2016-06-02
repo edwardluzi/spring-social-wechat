@@ -16,6 +16,7 @@ class AccountTemplate extends AbstractTemplate implements AccountOperations
         super(restOperations, objectMapper, isAuthorized);
     }
 
+    @Override
     public QuickResponseCodeTicket createQuickResponseCode(QuickResponseCodeRequest request)
     {
         requireAuthorization();

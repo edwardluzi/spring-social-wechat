@@ -33,16 +33,19 @@ public class WechatTemplate extends AbstractOAuth2ApiBinding implements Wechat
         initialize();
     }
 
+    @Override
     public AccountOperations accountOperations()
     {
         return accountOperations;
     }
 
+    @Override
     public MessageOperations messageOperations()
     {
         return messageOperations;
     }
 
+    @Override
     public RestOperations restOperations()
     {
         return getRestTemplate();
